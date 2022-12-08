@@ -1,0 +1,31 @@
+<?php
+    include("connection.php");
+ 
+    $fname = $_POST['firstname'];
+    $lname = $_POST['lastname'];
+    $dept = $_POST['department'];
+    $rolno = $_POST['rollno'];
+    $email = $_POST['email'];
+    $mobileno = $_POST['mobileno'];
+    $usname = $_POST['username'];
+    $role = $_POST['role'];
+    $pass = $_POST['password'];
+ 
+    if($cpass!=$pass){
+        echo '<script>
+                alert("Passwords do not match!");
+                window.location = "../routes/register.php";
+            </script>';
+    }
+    else{
+        move_uploaded_file($tmp_name,"../uploads/$image");
+        $insert = mysqli_query($connect, "insert into user (firstname, lastname, dept, rolno, email, mobileno, usname, role, pass) values('$fname', '$lname', '$dept', '$rolno', '$email', '$mobileno', '$usname', '$role', '$pass') ");
+        if($insert){
+            echo '<script>
+                    alert("Registration successfull!");
+                    window.location = "../";
+                </script>';
+        }
+    }
+    
+?>
